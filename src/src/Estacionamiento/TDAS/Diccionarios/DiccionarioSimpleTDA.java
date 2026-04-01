@@ -1,5 +1,5 @@
-package TDAS.Diccionarios;
-import TDAS.Conjuntos.ConjuntosTDA;
+package Estacionamiento.TDAS.Diccionarios;
+import Estacionamiento.TDAS.Conjuntos.ConjuntosTDA;
 
 public interface DiccionarioSimpleTDA {
     void InicializarDiccionario();

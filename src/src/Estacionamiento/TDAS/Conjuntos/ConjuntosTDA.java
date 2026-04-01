@@ -1,4 +1,4 @@
-package TDAS.Conjuntos;
+package Estacionamiento.TDAS.Conjuntos;
 
 public interface ConjuntosTDA {
     void InicializarConjunto();

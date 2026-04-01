@@ -1,4 +1,4 @@
-package TDAS.Colas;
+package Estacionamiento.TDAS.Colas;
 
 public interface ColaTDA {
     void InicializarCola();

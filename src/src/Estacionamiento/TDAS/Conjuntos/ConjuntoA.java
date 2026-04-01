@@ -1,4 +1,4 @@
-package TDAS.Conjuntos;
+package Estacionamiento.TDAS.Conjuntos;
 
 public class ConjuntoA implements ConjuntosTDA{
     private int[] a;

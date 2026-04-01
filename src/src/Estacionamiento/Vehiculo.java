@@ -1,6 +1,5 @@
 package Estacionamiento;
 
-
 public class Vehiculo {
 
     // Atributos
@@ -9,9 +8,8 @@ public class Vehiculo {
     String modelo;
     private String patente;
 
-
     // Metodo constructor
-    Vehiculo(String tipo, String marca, String modelo, String patente){
+    Vehiculo(){
         this.tipo = tipo;
         this.marca = marca;
         this.modelo = modelo;
@@ -19,8 +17,15 @@ public class Vehiculo {
     }
 
     // Getter - Setter
-
     void setPatente(String patente){
         this.patente = patente;
     }
+}
+
+class Auto extends Vehiculo {
+    // Vehiculo obj = new Vehiculo();
+}
+
+class Camioneta extends Vehiculo{
+    //
 }

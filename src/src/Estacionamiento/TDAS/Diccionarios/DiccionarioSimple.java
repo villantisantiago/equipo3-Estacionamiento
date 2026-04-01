@@ -1,9 +1,9 @@
-package TDAS.Diccionarios;
+package Estacionamiento.TDAS.Diccionarios;
 
-import TDAS.Conjuntos.ConjuntoA;
-import TDAS.Conjuntos.ConjuntosTDA;
+import Estacionamiento.TDAS.Conjuntos.ConjuntoA;
+import Estacionamiento.TDAS.Conjuntos.ConjuntosTDA;
 
-public abstract class DiccionarioSimple implements DiccionarioSimpleTDA {
+public class DiccionarioSimple implements DiccionarioSimpleTDA {
     private Elemento[] elementos;
     private int cant;
 
@@ -42,7 +42,7 @@ public abstract class DiccionarioSimple implements DiccionarioSimpleTDA {
         return elementos[pos].valor;
     }
 
-    public ConjuntosTDA Claves(){
+    public ConjuntosTDA claves(){
         ConjuntosTDA c = new ConjuntoA();
         c.InicializarConjunto();
         for (int i = 0; i < cant; i++)
