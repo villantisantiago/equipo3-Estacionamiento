@@ -12,7 +12,8 @@ public class Estacionamiento {
         d.InicializarDiccionario();
     }
     void IngresarVehiculo(Vehiculo vehiculo){
-
         d.Agregar(vehiculo.getPatente(), vehiculo);
     }
+
+    void
 }
