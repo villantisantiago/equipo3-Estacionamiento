@@ -24,6 +24,6 @@ public class Estacionamiento{
 
     void SacarVehiculo(String patente){
         d.Eliminar(patente);
-
+        // Devuelve el tiempo de salida
     }
 }
