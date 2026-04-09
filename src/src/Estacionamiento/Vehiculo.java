@@ -9,7 +9,7 @@ public class Vehiculo {
     protected int valorHora;
 
     // Metodo constructor
-    public Vehiculo(){
+    public Vehiculo(String patente){
         // mandar al main el scanner
         Scanner sc = new Scanner(System.in);
         System.out.println("Ingrese la patente:");
