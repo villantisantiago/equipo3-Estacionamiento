@@ -1,6 +1,8 @@
 package Estacionamiento.TDAS.Diccionarios;
 
+import Estacionamiento.Vehiculo;
+
 public class Elemento {
-    public int valor;
-    public int clave;
+    public Vehiculo valor;
+    public String clave;
 }
