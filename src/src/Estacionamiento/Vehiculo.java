@@ -16,6 +16,10 @@ public class Vehiculo {
     void setPatente(String patente){
         this.patente = patente;
     }
+
+    String getPatente(){
+        return this.patente;
+    }
 }
 
 class Auto extends Vehiculo {
