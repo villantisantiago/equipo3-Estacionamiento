@@ -29,6 +29,7 @@ public class DiccionarioVehiculo implements estacionamientoDiccionario {
             elementos[pos].clave = patente;
             cant ++;
         }
+        elementos[pos].valor = obj;
     }
 
     public void Eliminar(String Patente){

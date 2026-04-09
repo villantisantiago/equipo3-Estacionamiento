@@ -4,16 +4,26 @@ import java.time.Duration;
 import java.time.LocalDate;
 import Estacionamiento.TDAS.Diccionarios.*;
 
-public class Estacionamiento {
+public class Estacionamiento{
     private int tiempoDeEntrada;
-    DiccionarioSimpleTDA d = new DiccionarioSimple();
+    estacionamientoDiccionario d = new DiccionarioVehiculo();
 
     void EmpezarDia(){
         d.InicializarDiccionario();
     }
-    void IngresarVehiculo(Vehiculo vehiculo){
-        d.Agregar(vehiculo.getPatente(), vehiculo);
+
+    public Boolean IngresarVehiculo(Vehiculo vehiculo){
+        ConjuntoVehiculos claves = d.Claves();
+        if(claves.ConjuntoVacio()){
+            d.Ingresar(vehiculo.getPatente(), vehiculo);
+            return true;
+        }else{
+            return false;
+        }
     }
 
-    void
+    void SacarVehiculo(String patente){
+        d.Eliminar(patente);
+
+    }
 }
