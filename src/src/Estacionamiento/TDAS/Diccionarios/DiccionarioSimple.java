@@ -19,7 +19,7 @@ public class DiccionarioSimple implements DiccionarioSimpleTDA {
         return i;
     }
 
-    public void Agregar(int clave, int valor){
+    public void Agregar(String clave, int valor){
         int pos = Clave2Ind(clave);
         if (pos == -1){
             pos = cant;
