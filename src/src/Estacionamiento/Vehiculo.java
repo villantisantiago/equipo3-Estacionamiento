@@ -5,15 +5,16 @@ import java.util.Scanner;
 public class Vehiculo {
 
     // Atributos
-    private String patente;
+    protected String patente;
     protected int valorHora;
+    protected int horadeEntrada;
 
     // Metodo constructor
-    public Vehiculo(String patente){
+    public Vehiculo(String patente, int hora, int preciohora){
         // mandar al main el scanner
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Ingrese la patente:");
-        this.patente = sc.nextLine();
+        this.patente = patente;
+        horadeEntrada = hora;
+        valorHora = preciohora;
     }
 
     // Getter - Setter
@@ -28,18 +29,16 @@ public class Vehiculo {
 
 class Auto extends Vehiculo {
     // Vehiculo obj = new Vehiculo();
-    public Auto (){
-        super();
-        this.valorHora = 2500 ;
+    public Auto (String patente, int hora){
+        super(patente ,hora,2500);
     }
 
 }
 
 class Camioneta extends Vehiculo{
     //
-    public Camioneta (){
-        super();
-        this.valorHora = 3500 ;
+    public Camioneta (String patente, int hora){
+        super(patente,hora,3500);;
     }
 
 }

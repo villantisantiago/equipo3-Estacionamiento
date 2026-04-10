@@ -10,7 +10,7 @@ public class DiccionarioVehiculo implements estacionamientoDiccionario {
     private int cant;
 
     public void InicializarDiccionario() {
-        elementos = new Elemento[10];
+        elementos = new Elemento[100];
         cant = 0;
     }
 
@@ -51,5 +51,13 @@ public class DiccionarioVehiculo implements estacionamientoDiccionario {
         for (int i = 0; i < cant; i++)
             c.Agregar(elementos[i].clave);
         return c;
+    }
+
+    public boolean Estalleno() {
+        if (cant == elementos.length) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
