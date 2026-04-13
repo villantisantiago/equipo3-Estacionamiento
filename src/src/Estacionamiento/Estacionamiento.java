@@ -35,6 +35,14 @@ public class Estacionamiento{
         LocalTime hora = LocalTime.parse(input, formatter);
 
         d.Eliminar(patente);
+        return 2;
+    }
 
+    boolean HayLugar(){
+        return true;
+    }
+
+    int CuantoLugar(){
+        return 0;
     }
 }
