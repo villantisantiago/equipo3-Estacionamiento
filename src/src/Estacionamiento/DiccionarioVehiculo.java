@@ -53,7 +53,7 @@ public class DiccionarioVehiculo implements estacionamientoDiccionario {
         return c;
     }
 
-    public boolean Estalleno() {
+    public boolean EstaLleno() {
         if (cant == elementos.length) {
             return true;
         } else {
