@@ -13,7 +13,7 @@ public class Estacionamiento{
     private int tiempoDeEntrada;
     DiccionarioVehiculo d = new DiccionarioVehiculo();
 
-    void EmpezarDia(){
+    public void EmpezarDia(){
         d.InicializarDiccionario();
     }
 
