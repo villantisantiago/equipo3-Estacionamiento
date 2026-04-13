@@ -1,42 +1,53 @@
 package Estacionamiento.TDAS.Colas;
 
-public class ColaPrioridadAO implements ColaPrioridadTDA{
-    Elemento[] elementos;
-    int indice;
+import Estacionamiento.Vehiculo;
 
-    public void InicializarCola() {
-        elementos = new Elemento[100];
-        indice = 0;
+public class ColaPrioridadAO implements ColaPrioridadTDA {
 
+    class Nodo {
+        Vehiculo valor;
+        int prioridad;
+        Nodo sig;
     }
 
-    public void AcolarPrioridad(int x, int prioridad) {
-        int j = indice;
-        while (j > 0 && elementos[j-1].prioridad > prioridad){
-            elementos[j] = elementos[j - 1];
-            j--;
+    Nodo primero;
+
+    public void InicializarCola() {
+        primero = null;
+    }
+
+    public void AcolarPrioridad(Vehiculo x, int prioridad) {
+        Nodo nuevo = new Nodo();
+        nuevo.valor = x;
+        nuevo.prioridad = prioridad;
+        nuevo.sig = null;
+
+        if (primero == null || prioridad > primero.prioridad) {
+            nuevo.sig = primero;
+            primero = nuevo;
+        } else {
+            Nodo actual = primero;
+            while (actual.sig != null && actual.sig.prioridad >= prioridad) {
+                actual = actual.sig;
+            }
+            nuevo.sig = actual.sig;
+            actual.sig = nuevo;
         }
-        elementos[j] = new Elemento();
-        elementos[j].valor = x;
-        elementos[j].prioridad = prioridad;
-        indice ++;
     }
 
     public void Desacolar() {
-        indice--;
+        primero = primero.sig;
     }
 
     public boolean ColaVacia() {
-        return (indice == 0);
+        return primero == null;
     }
 
-    public int Primero() {
-        return elementos[indice - 1].valor;
+    public Vehiculo Primero() {
+        return primero.valor;
     }
 
     public int Prioridad() {
-        return elementos[indice - 1].prioridad;
+        return primero.prioridad;
     }
 }
-
-

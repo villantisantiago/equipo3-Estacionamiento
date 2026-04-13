@@ -1,10 +1,12 @@
 package Estacionamiento.TDAS.Colas;
 
+import Estacionamiento.Vehiculo;
+
 public interface ColaPrioridadTDA {
     void InicializarCola();
-    void AcolarPrioridad(int x, int prioridad);
+    void AcolarPrioridad(Vehiculo x, int prioridad);
     void Desacolar();
     boolean ColaVacia();
-    int Primero();
+    Vehiculo Primero();
     int Prioridad();
 }
