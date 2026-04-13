@@ -6,58 +6,63 @@ import Estacionamiento.TDAS.Diccionarios.DiccionarioSimpleTDA;
 import Estacionamiento.TDAS.Diccionarios.Elemento;
 
 public class DiccionarioVehiculo implements estacionamientoDiccionario {
-    private Elemento[] elementos;
-    private int cant;
+    private class NodoClave {
+        String clave;
+        Vehiculo valor;
+        NodoClave sigClave;
+    }
+
+    private NodoClave origen;
 
     public void InicializarDiccionario() {
-        elementos = new Elemento[100];
-        cant = 0;
+        origen = null;
     }
 
-    private int Clave2Ind(String patente) {
-        int i = cant - 1;
-        while (i >= 0 && elementos[i].clave.equals(patente))
-            i--;
-        return i;
-    }
-
-    public void Ingresar(String patente, Vehiculo obj){
-        int pos = Clave2Ind(patente);
-        if (pos == -1){ // La patente no se encuentra y no existe
-            pos = cant; // Nueva Entrada
-            elementos[pos] = new Elemento();
-            elementos[pos].clave = patente;
-            cant ++;
+    public void Agregar(String clave, Vehiculo valor) {
+        NodoClave nc = Clave2NodoClave(clave);
+        if (nc == null) {
+            nc = new NodoClave();
+            nc.clave = clave;
+            nc.sigClave = origen;
+            origen = nc; // Nuevo Origen
         }
-        elementos[pos].valor = obj;
+        nc.valor = valor;
     }
 
-    public void Eliminar(String Patente){
-        int pos = Clave2Ind(Patente);
-        if (pos != -1){
-            elementos[pos] = elementos[cant - 1];
-            cant--;
+    private NodoClave Clave2NodoClave(String clave) {
+        NodoClave aux = origen; // el nodo viajero
+        while (aux != null && !aux.clave.equals(clave))
+            aux = aux.sigClave;
+        return aux;
+    }
+
+    public void Eliminar(String clave) {
+        if (origen != null) {
+            if (origen.clave.equals(clave)) {
+                origen = origen.sigClave;
+            } else { // es algún otro
+                NodoClave aux = origen;
+                while (aux.sigClave != null && !aux.sigClave.clave.equals(clave))
+                    aux = aux.sigClave;
+                if (aux.sigClave != null)
+                    aux.sigClave = aux.sigClave.sigClave;
+            }
         }
     }
 
-    public Vehiculo Recuperar(String patente){
-        int pos = Clave2Ind(patente);
-        return elementos[pos].valor;
+    public Vehiculo Recuperar(String patente) {
+        NodoClave nc = Clave2NodoClave(patente);
+        return nc.valor;
     }
 
-    public ConjuntoVehiculos Claves(){
-        ConjuntoVehiculos c = new ConjuntoVehiculos();
+    public estacionamientoConjunto Claves() {
+        estacionamientoConjunto c = new ConjuntoVehiculos();
         c.InicializarConjunto();
-        for (int i = 0; i < cant; i++)
-            c.Agregar(elementos[i].clave);
-        return c;
-    }
-
-    public boolean EstaLleno() {
-        if (cant == elementos.length) {
-            return true;
-        } else {
-            return false;
+        NodoClave aux = origen;
+        while (aux != null) {
+            c.Agregar(aux.clave);
+            aux = aux.sigClave;
         }
+        return c;
     }
 }

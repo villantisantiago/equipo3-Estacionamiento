@@ -1,4 +1,7 @@
 package Estacionamiento;
+import java.time.LocalTime;
+import java.time.Duration;
+import java.time.LocalDate;
 import Estacionamiento.TDAS.Diccionarios.*;
 
 import java.time.LocalTime;
@@ -15,7 +18,7 @@ public class Estacionamiento{
     }
 
     public Boolean IngresarVehiculo(Vehiculo vehiculo){
-        if(!d.EstaLleno()){
+        if(!d.Estalleno()){
             d.Ingresar(vehiculo.getPatente(), vehiculo);
             return true;
         }else{
@@ -44,5 +47,8 @@ public class Estacionamiento{
 
     int CuantoLugar(){
         return 0;
+    void SacarVehiculo(String patente){
+        d.Eliminar(patente);
+        // Devuelve el tiempo de salida
     }
 }
