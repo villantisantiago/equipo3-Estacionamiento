@@ -1,6 +1,10 @@
 package Estacionamiento;
 import Estacionamiento.TDAS.Diccionarios.*;
+
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
 
 public class Estacionamiento{
     private int tiempoDeEntrada;
@@ -19,13 +23,18 @@ public class Estacionamiento{
         }
     }
 
-    void SacarVehiculo(String patente){
+    int SacarVehiculo(String patente){
         Vehiculo vehiculo = d.Recuperar(patente);
-        vehiculo.
+
+        // Pide el tiempo de salida
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Ingrese hora (HH:mm): ");
+        String input = sc.nextLine();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime hora = LocalTime.parse(input, formatter);
+
         d.Eliminar(patente);
-        // Devuelve el tiempo de salida
-        Scanner entrada = new Scanner(System.in);
-        String tiempoSalida = entrada.nextLine();
 
     }
 }

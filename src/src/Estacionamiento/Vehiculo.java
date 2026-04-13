@@ -1,5 +1,6 @@
 package Estacionamiento;
 
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class Vehiculo {
@@ -7,10 +8,10 @@ public class Vehiculo {
     // Atributos
     protected String patente;
     protected int valorHora;
-    protected String horadeEntrada;
+    protected LocalTime horadeEntrada;
 
     // Metodo constructor
-    public Vehiculo(String patente, String hora, int preciohora){
+    public Vehiculo(String patente, LocalTime hora, int preciohora){
         // mandar al main el scanner
         this.patente = patente;
         horadeEntrada = hora;
