@@ -22,4 +22,20 @@ public class ColaPrioridadDA implements ColaPrioridadTDA{
         prioriades[j] = prioridad;
         indice ++;
     }
+
+    public void Desacolar() {
+        indice --;
+    }
+
+    public boolean ColaVacia() {
+        return (indice == 0);
+    }
+
+    public int Primero() {
+        return elementos[indice - 1];
+    }
+
+    public int Prioridad() {
+        return prioriades[indice - 1];
+    }
 }

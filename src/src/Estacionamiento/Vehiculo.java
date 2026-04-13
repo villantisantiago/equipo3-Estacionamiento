@@ -5,37 +5,45 @@ import java.util.Scanner;
 public class Vehiculo {
 
     // Atributos
-    private String patente;
+    protected String patente;
     protected int valorHora;
+    protected String horadeEntrada;
 
     // Metodo constructor
-    public Vehiculo(){
+    public Vehiculo(String patente, String hora, int preciohora){
         // mandar al main el scanner
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Ingrese la patente:");
-        this.patente = sc.nextLine();
+        this.patente = patente;
+        horadeEntrada = hora;
+        valorHora = preciohora;
     }
 
     // Getter - Setter
     public void setPatente(String patente){
         this.patente = patente;
     }
+
+    String getPatente(){
+        return this.patente;
+    }
+
+    String getHoradeEntrada(){
+        return this.patente;
+    }
+
 }
 
 class Auto extends Vehiculo {
     // Vehiculo obj = new Vehiculo();
-    public Auto (){
-        super();
-        this.valorHora = 2500 ;
+    public Auto (String patente, String hora){
+        super(patente ,hora,2500);
     }
 
 }
 
 class Camioneta extends Vehiculo{
     //
-    public Camioneta (){
-        super();
-        this.valorHora = 3500 ;
+    public Camioneta (String patente, String hora){
+        super(patente,hora,3500);;
     }
 
 }
