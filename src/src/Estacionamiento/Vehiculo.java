@@ -8,14 +8,15 @@ public class Vehiculo {
     // Atributos
     protected String patente;
     protected int valorHora;
-    protected LocalTime horadeEntrada;
+    protected LocalTime horaDeEntrada;
     protected String tipo;
 
     // Metodo constructor
-    public Vehiculo(String patente, String tipo){
+    public Vehiculo(String patente, String tipo, LocalTime horaDeEntrada){
         // mandar al main el scanner
         this.patente = patente;
         this.tipo = tipo;
+        this.horaDeEntrada = horaDeEntrada;
     }
 
     // Getter - Setter
@@ -28,10 +29,10 @@ public class Vehiculo {
     }
 
     LocalTime getHoradeEntrada(){
-        return this.horadeEntrada;
+        return this.horaDeEntrada;
     }
 
     void setHoraEntrada(LocalTime horadeEntrada){
-        this.horadeEntrada = horadeEntrada;
+        this.horaDeEntrada = horadeEntrada;
     }
 }

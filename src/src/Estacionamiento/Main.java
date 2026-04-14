@@ -57,10 +57,11 @@ void main() {
                 }
 
             case 2:
-                if (estacionamiento.LugarCola()){
-                    estacionamiento.SacarCola();
+                System.out.print("Digite la patente a retirar");
+                String pasarpatente = sc.nextLine();
+                pasarpatente = pasarpatente.toUpperCase();
+                estacionamiento.SacarVehiculo(pasarpatente);
 
-                }
 
             case 3:
                 int cant = estacionamiento.CuantoLugar();
@@ -69,10 +70,13 @@ void main() {
 
 
 
+              /*  if (estacionamiento.LugarCola()){
+                    estacionamiento.SacarCola();
+
+                }
 
 
 
-                /*
                 HayLugar();
                  CuantoLugar
                  */
