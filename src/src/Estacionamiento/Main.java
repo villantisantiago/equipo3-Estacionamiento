@@ -7,8 +7,8 @@ void main() {
     Estacionamiento estacionamiento = new Estacionamiento();
     estacionamiento.EmpezarDia();
 
-    var bandera = true;
-    do (bandera)
+    boolean bandera = true;
+    while (bandera){
         System.out.println("1) Ingresar vehiculo");
         System.out.println("2) Retirar vehiculo");
         System.out.println("3) Lugares disponibles");
@@ -24,10 +24,10 @@ void main() {
         switch (opcion) {
             case 0:
                 System.out.print("Esta seguro que desea cerrar el sistema? S/N: ");
-                String opcion = sc.nextLine();
-                opcion = opcion.toUpperCase();
+                String opcionf = sc.nextLine();
+                opcionf = opcionf.toUpperCase();
 
-                if (opcion.equals("S")) {
+                if (opcionf.equals("S")) {
                     bandera = false;
                 break;
                 }
@@ -48,8 +48,11 @@ void main() {
                     if (ing.equals("S")){
                         System.out.print("Ingrese patente: ");
                         patente = sc.nextLine();
+                        System.out.print("Que vehiculo tiene? C/A: ");
+                        String TipoVehiculo = sc.nextLine();
                         patente = patente.toUpperCase();
-                        estacionamiento.AgregarCola(patente);
+                        Vehiculo vehiculo = new Vehiculo(patente, TipoVehiculo);
+                        estacionamiento.AgregarACola(vehiculo);
                     }
                 }
 
@@ -60,7 +63,8 @@ void main() {
                 }
 
             case 3:
-
+                int cant = estacionamiento.CuantoLugar();
+                System.out.println("Hay" + cant + "lugares disponibles");
             case 4:
 
 
@@ -79,4 +83,5 @@ void main() {
     }
 
 
+}
 }

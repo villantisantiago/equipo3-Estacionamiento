@@ -54,15 +54,15 @@ public class Estacionamiento{
         return 2;
     }
 
-    boolean HayLugar(){
+    public boolean HayLugar(){
         return contD < maximoD;
     }
 
-    int CuantoLugar() {
+    public int CuantoLugar() {
         return maximoD - contD;
     }
 
-    void AgregarACola(Vehiculo vehiculo){
+    public void AgregarACola(Vehiculo vehiculo){
         cola.Acolar(vehiculo);
         contC ++;
     }
@@ -71,7 +71,7 @@ public class Estacionamiento{
         return contC;
     }
 
-    void SacarCola(Vehiculo vehiculo){
+    public void SacarCola(Vehiculo vehiculo){
         cola.Desacolar();
         contC --;
     }
