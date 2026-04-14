@@ -32,7 +32,7 @@ public class Vehiculo {
         return this.horaDeEntrada;
     }
 
-    void setHoraEntrada(LocalTime horadeEntrada){
+    public void setHoraEntrada(LocalTime horadeEntrada){
         this.horaDeEntrada = horadeEntrada;
     }
 }

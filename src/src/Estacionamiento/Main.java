@@ -35,12 +35,16 @@ void main() {
             case 1:
                 if (estacionamiento.HayLugar()){
                     System.out.print("Que vehiculo tiene? C/A: ");
-                    String TipoVehiculo = sc.nextLine();
+                    String tipoVehiculo = sc.nextLine();
                     System.out.print("Ingrese la patente: ");
                     patente = sc.nextLine();
                     patente = patente.toUpperCase();
-                    Vehiculo auto = new Vehiculo(patente, TipoVehiculo);
-                    estacionamiento.IngresarVehiculo(auto);
+                    Scanner sc = new Scanner(System.in);
+                    System.out.print("Ingrese hora (HH:mm): ");
+                    String input = sc.nextLine();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                    LocalTime hora = LocalTime.parse(input, formatter);
+                    estacionamiento.IngresarVehiculo(estacionamiento.CrearVehiculo(patente, tipoVehiculo, hora));
                 }
                 else{
                     System.out.print("Desea ingresar a la cola? S/N: ");
@@ -51,7 +55,7 @@ void main() {
                         System.out.print("Que vehiculo tiene? C/A: ");
                         String TipoVehiculo = sc.nextLine();
                         patente = patente.toUpperCase();
-                        Vehiculo vehiculo = new Vehiculo(patente, TipoVehiculo);
+                        Vehiculo vehiculo = new Vehiculo(patente, TipoVehiculo, LocalTime "0");
                         estacionamiento.AgregarACola(vehiculo);
                     }
                 }
@@ -60,12 +64,22 @@ void main() {
                 System.out.print("Digite la patente a retirar");
                 String pasarpatente = sc.nextLine();
                 pasarpatente = pasarpatente.toUpperCase();
-                estacionamiento.SacarVehiculo(pasarpatente);
-
+                int total = estacionamiento.SacarVehiculo(pasarpatente);
+                System.out.println("El importe a pagar es de $"+ total);}
+                if (estacionamiento.CantidadCola()> 0){
+                    Vehiculo entra = estacionamiento.SacarCola();
+                    Scanner sc = new Scanner(System.in);
+                    System.out.print("Ingrese hora (HH:mm): ");
+                    String input = sc.nextLine();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                    LocalTime hora = LocalTime.parse(input, formatter);
+                    entra.setHoraEntrada(hora);
+                    estacionamiento.IngresarVehiculo(entra);
 
             case 3:
                 int cant = estacionamiento.CuantoLugar();
                 System.out.println("Hay" + cant + "lugares disponibles");
+
             case 4:
 
 
