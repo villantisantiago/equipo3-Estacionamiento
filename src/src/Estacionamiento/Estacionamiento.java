@@ -1,7 +1,8 @@
 package Estacionamiento;
 import java.time.LocalTime;
 
-import Estacionamiento.TDAS.Colas.ColaPrioridadAO;
+import Estacionamiento.TDAS.Colas.ColaTDA;
+import Estacionamiento.TDAS.Colas.ColaLD;
 import Estacionamiento.TDAS.Diccionarios.*;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 public class Estacionamiento{
     private int tiempoDeEntrada;
     DiccionarioVehiculo d = new DiccionarioVehiculo();
-    ColaPrioridadAO cola = new ColaPrioridadAO();
+    ColaTDA cola = new ColaLD();
     int contD = 0;
     int maximoD = 10;
     int contC = 0;
