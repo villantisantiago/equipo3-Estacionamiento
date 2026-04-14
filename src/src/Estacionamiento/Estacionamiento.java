@@ -6,7 +6,7 @@ import Estacionamiento.TDAS.Colas.ColaLD;
 import Estacionamiento.TDAS.Diccionarios.*;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
+import java.time.Duration;
 
 
 public class Estacionamiento{
@@ -22,37 +22,22 @@ public class Estacionamiento{
         cola.InicializarCola();
     }
 
-    public Boolean IngresarVehiculo(String patente, String tipo, LocalTime hora){
-        if(contD<maximoD){
-
-            Scanner sc = new Scanner(System.in);
-            System.out.print("Ingrese hora (HH:mm): ");
-            String input = sc.nextLine();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-            LocalTime hora = LocalTime.parse(input, formatter);
-            Vehiculo vehiculo = new Vehiculo();
-            d.Agregar(vehiculo.getPatente(), vehiculo);
-            contD ++;
-            return true;
-        }else{
-            return false;
-        }
+    public Vehiculo CrearVehiculo(String patente, String tipo, LocalTime hora){
+        Vehiculo v = new Vehiculo(patente, tipo, hora);
+        return v;
     }
 
-    public void SacarVehiculo(String patente){
+    public void IngresarVehiculo(Vehiculo vehiculo){
+        d.Agregar(vehiculo.getPatente(), vehiculo);
+        contD ++;
+    }
+
+    public void SacarVehiculo(String patente, LocalTime salida){
         Vehiculo vehiculo = d.Recuperar(patente);
-
-        // Pide el tiempo de salida
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Ingrese hora (HH:mm): ");
-        String input = sc.nextLine();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime hora = LocalTime.parse(input, formatter);
-
+        LocalTime entrada = vehiculo.getHoradeEntrada();
+        Duration duracion = Duration.between(entrada, salida);
         d.Eliminar(patente);
         contD --;
-        // return precio;
     }
 
     public boolean HayLugar(){
@@ -72,8 +57,12 @@ public class Estacionamiento{
         return contC;
     }
 
-    public void SacarCola(Vehiculo vehiculo){
+    public Vehiculo SacarCola(){
+        Vehiculo vehiculo = cola.Primero();
         cola.Desacolar();
         contC --;
+        return vehiculo;
     }
 }
+
+
