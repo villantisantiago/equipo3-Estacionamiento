@@ -27,7 +27,11 @@ public class Vehiculo {
         return this.patente;
     }
 
-    String getHoradeEntrada(){
-        return this.patente;
+    LocalTime getHoradeEntrada(){
+        return this.horadeEntrada;
+    }
+
+    void setHoraEntrada(LocalTime horadeEntrada){
+        this.horadeEntrada = horadeEntrada;
     }
 }

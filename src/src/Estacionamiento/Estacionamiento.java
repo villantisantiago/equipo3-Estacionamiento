@@ -1,5 +1,7 @@
 package Estacionamiento;
 import java.time.LocalTime;
+
+import Estacionamiento.TDAS.Colas.ColaPrioridadAO;
 import Estacionamiento.TDAS.Diccionarios.*;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -9,15 +11,18 @@ import java.util.Scanner;
 public class Estacionamiento{
     private int tiempoDeEntrada;
     DiccionarioVehiculo d = new DiccionarioVehiculo();
-    int cont = 0;
-    int maximo = 10;
+    ColaPrioridadAO cola = new ColaPrioridadAO();
+    int contD = 0;
+    int maximoD = 10;
+    int contC = 0;
 
     public void EmpezarDia(){
         d.InicializarDiccionario();
+        cola.InicializarCola();
     }
 
     public Boolean IngresarVehiculo(Vehiculo vehiculo){
-        if(cont<maximo){
+        if(contD<maximoD){
             Scanner sc = new Scanner(System.in);
             System.out.print("Ingrese hora (HH:mm): ");
             String input = sc.nextLine();
@@ -26,7 +31,7 @@ public class Estacionamiento{
 
             vehiculo.setHoraEntrada(hora);
             d.Agregar(vehiculo.getPatente(), vehiculo);
-            cont ++;
+            contD ++;
             return true;
         }else{
             return false;
@@ -45,28 +50,29 @@ public class Estacionamiento{
         LocalTime hora = LocalTime.parse(input, formatter);
 
         d.Eliminar(patente);
+        contD --;
         return 2;
     }
 
     boolean HayLugar(){
-        return cont < maximo;
+        return contD < maximoD;
     }
 
     int CuantoLugar() {
-        return 0;
+        return maximoD - contD;
     }
 
-    void AgregarACola(String patente){
-        Vehiculo vehiculo = d.Recuperar(patente);
+    void AgregarACola(Vehiculo vehiculo){
+        cola.Acolar(vehiculo);
+        contC ++;
     }
 
-    Boolean LugarCola(){
-        return true;
+    int CantidadCola(){
+        return contC;
     }
 
-    void SacarCola(){
-
+    void SacarCola(Vehiculo vehiculo){
+        cola.Desacolar();
+        contC --;
     }
-
-
 }
