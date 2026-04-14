@@ -32,6 +32,10 @@ public class Vehiculo {
         return this.horaDeEntrada;
     }
 
+    String getTipo(){
+        return this.tipo;
+    }
+
     public void setHoraEntrada(LocalTime horadeEntrada){
         this.horaDeEntrada = horadeEntrada;
     }

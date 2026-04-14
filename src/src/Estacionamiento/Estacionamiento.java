@@ -1,12 +1,10 @@
 package Estacionamiento;
+import java.time.Duration;
 import java.time.LocalTime;
-
 import Estacionamiento.TDAS.Colas.ColaTDA;
 import Estacionamiento.TDAS.Colas.ColaLD;
-import Estacionamiento.TDAS.Diccionarios.*;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
+
+
 
 
 public class Estacionamiento{
@@ -14,45 +12,39 @@ public class Estacionamiento{
     DiccionarioVehiculo d = new DiccionarioVehiculo();
     ColaTDA cola = new ColaLD();
     int contD = 0;
-    int maximoD = 10;
+    int maximoD = 2;
     int contC = 0;
+    double precio;
 
     public void EmpezarDia(){
         d.InicializarDiccionario();
         cola.InicializarCola();
     }
 
-    public Boolean IngresarVehiculo(String patente, String tipo, LocalTime hora){
-        if(contD<maximoD){
-
-            Scanner sc = new Scanner(System.in);
-            System.out.print("Ingrese hora (HH:mm): ");
-            String input = sc.nextLine();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-            LocalTime hora = LocalTime.parse(input, formatter);
-            Vehiculo vehiculo = new Vehiculo();
-            d.Agregar(vehiculo.getPatente(), vehiculo);
-            contD ++;
-            return true;
-        }else{
-            return false;
-        }
+    public Vehiculo CrearVehiculo(String patente, String tipo, LocalTime hora){
+        return new Vehiculo(patente, tipo, hora);
     }
 
-    public void SacarVehiculo(String patente){
+    public void IngresarVehiculo(Vehiculo vehiculo){
+        d.Agregar(vehiculo.getPatente(), vehiculo);
+        contD ++;
+    }
+
+    public double SacarVehiculo(String patente, LocalTime salida){
         Vehiculo vehiculo = d.Recuperar(patente);
-
-        // Pide el tiempo de salida
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Ingrese hora (HH:mm): ");
-        String input = sc.nextLine();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime hora = LocalTime.parse(input, formatter);
-
+        LocalTime entrada = vehiculo.getHoradeEntrada();
+        Duration duracion = Duration.between(entrada, salida);
+        String tipo = vehiculo.getTipo();
+        long minutos = duracion.toMinutes();
+        long horas = (minutos + 59) / 60;
+        if (tipo.equals("A")){
+            double precio = horas * 1000;
+        }else{
+            double precio = horas * 2000;
+        }
         d.Eliminar(patente);
         contD --;
-        // return precio;
+        return precio;
     }
 
     public boolean HayLugar(){
@@ -68,12 +60,14 @@ public class Estacionamiento{
         contC ++;
     }
 
-    int CantidadCola(){
+    public int CantidadCola(){
         return contC;
     }
 
-    public void SacarCola(Vehiculo vehiculo){
+    public Vehiculo SacarCola(){
+        Vehiculo vehiculo = cola.Primero();
         cola.Desacolar();
         contC --;
+        return vehiculo;
     }
 }

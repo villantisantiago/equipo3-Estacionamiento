@@ -34,9 +34,9 @@ public class ColaLD implements ColaTDA {
             ultimo = null;
     }
 
-    public boolean ColaVacia() {
-        return ultimo == null;
-    }
+  //  public boolean ColaVacia() {
+  //      return ultimo == null;
+  //  }
 
     public Vehiculo Primero() {
         return primero.info;
