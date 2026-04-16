@@ -6,6 +6,6 @@ public interface ColaTDA {
     void InicializarCola();
     void Acolar(Vehiculo x);
     void Desacolar();
-  //  boolean ColaVacia();
+    boolean ColaVacia();
     Vehiculo Primero();
 }

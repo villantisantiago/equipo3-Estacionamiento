@@ -28,6 +28,10 @@ public class ConjuntoVehiculos implements estacionamientoConjunto{
         }
     }
 
+    public String Elegir() {
+        return a[cant - 1];
+    }
+
     public boolean Pertenece(String x) {
         String patenteMayus = x.toUpperCase();
         int i = 0;
