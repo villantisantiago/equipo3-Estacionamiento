@@ -5,5 +5,6 @@ public interface estacionamientoConjunto {
     void Agregar(String x);
     boolean ConjuntoVacio();
     void Sacar(String x);
+    String Elegir();
     boolean Pertenece(String x);
 }

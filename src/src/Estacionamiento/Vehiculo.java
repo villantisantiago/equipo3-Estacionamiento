@@ -8,14 +8,15 @@ public class Vehiculo {
     // Atributos
     protected String patente;
     protected int valorHora;
-    protected LocalTime horadeEntrada;
+    protected LocalTime horaDeEntrada;
+    protected String tipo;
 
     // Metodo constructor
-    public Vehiculo(String patente, LocalTime hora, int preciohora){
+    public Vehiculo(String patente, String tipo, LocalTime horaDeEntrada){
         // mandar al main el scanner
         this.patente = patente;
-        horadeEntrada = hora;
-        valorHora = preciohora;
+        this.tipo = tipo;
+        this.horaDeEntrada = horaDeEntrada;
     }
 
     // Getter - Setter
@@ -27,24 +28,15 @@ public class Vehiculo {
         return this.patente;
     }
 
-    String getHoradeEntrada(){
-        return this.patente;
+    LocalTime getHoradeEntrada(){
+        return this.horaDeEntrada;
     }
 
-}
-
-class Auto extends Vehiculo {
-    // Vehiculo obj = new Vehiculo();
-    public Auto (String patente, String hora){
-        super(patente ,hora,2500);
+    String getTipo(){
+        return this.tipo;
     }
 
-}
-
-class Camioneta extends Vehiculo{
-    //
-    public Camioneta (String patente, String hora){
-        super(patente,hora,3500);;
+    public void setHoraEntrada(LocalTime horadeEntrada){
+        this.horaDeEntrada = horadeEntrada;
     }
-
 }

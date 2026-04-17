@@ -1,9 +1,11 @@
 package Estacionamiento.TDAS.Colas;
 
+import Estacionamiento.Vehiculo;
+
 public interface ColaTDA {
     void InicializarCola();
-    void Acolar(int x);
+    void Acolar(Vehiculo x);
     void Desacolar();
     boolean ColaVacia();
-    int Primero();
+    Vehiculo Primero();
 }
