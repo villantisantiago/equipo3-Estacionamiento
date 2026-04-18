@@ -5,7 +5,7 @@ import Estacionamiento.Vehiculo;
 void main() {
 
     Estacionamiento estacionamiento = new Estacionamiento();
-    estacionamiento.EmpezarDia();
+    estacionamiento.EmpezarPrograma();
     double recaudacion = 0;
     String tipoVehiculo;
     boolean bandera = true;
@@ -68,6 +68,9 @@ void main() {
                             System.out.print("Ingrese la patente: ");
                             patente = sc.nextLine();
                             patente = patente.toUpperCase();
+                            if (estacionamiento.EstaPatente(patente)){
+                                System.out.println("La patente que quiere ingresar ya se encuentra en el estacionamiento, por favor ingrese nuevamente. ");
+                            }
                         } while (estacionamiento.EstaPatente(patente));
                         System.out.print("Que vehiculo tiene? C/A: ");
                         String TipoVehiculo = sc.nextLine();
@@ -107,6 +110,7 @@ void main() {
                 break;
             case 4:
                 System.out.println("la recaudacion total del dia fue de $"+ recaudacion);
+                estacionamiento.FinalizarDia();
                 break;
             case 5:
                 estacionamiento.Patentes();

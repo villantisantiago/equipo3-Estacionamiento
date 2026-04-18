@@ -1,11 +1,14 @@
 package Estacionamiento;
 import java.time.Duration;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import Estacionamiento.TDAS.Colas.ColaTDA;
 import Estacionamiento.TDAS.Colas.ColaLD;
 
 public class Estacionamiento{
     DiccionarioVehiculo d = new DiccionarioVehiculo();
+
     ColaTDA cola = new ColaLD();
     ConjuntoVehiculos conjuntopatentes = new ConjuntoVehiculos();
     double precio;
@@ -14,10 +17,34 @@ public class Estacionamiento{
     int contC = 0;
     String elemento;
 
-    public void EmpezarDia(){
+    public void EmpezarPrograma(){ // Habria q cambiarle el nombre a ese metodo
         d.InicializarDiccionario();
         cola.InicializarCola();
         conjuntopatentes.InicializarConjunto();
+    }
+
+    public void FinalizarDia(){
+        estacionamientoConjunto aux = new ConjuntoVehiculos();
+        aux.InicializarConjunto();
+        String salida = "24:00";
+        String entrada = "00:00";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime hora = LocalTime.parse(salida, formatter);
+        LocalTime hora2 = LocalTime.parse(salida, formatter);
+
+        while(!conjuntopatentes.ConjuntoVacio()){
+            elemento = conjuntopatentes.Elegir();
+            Vehiculo vehiculo = d.Recuperar(elemento);
+            vehiculo.setPrecio(CalcularPrecio(elemento, hora));
+            vehiculo.setHoraEntrada(hora2);
+            aux.Agregar(elemento);
+            conjuntopatentes.Sacar(elemento);
+        }
+        while(!aux.ConjuntoVacio()){
+            elemento = aux.Elegir();
+            conjuntopatentes.Agregar(elemento);
+            aux.Sacar(elemento);
+        }
     }
 
     public Vehiculo CrearVehiculo(String patente, String tipo, LocalTime hora){
@@ -35,6 +62,16 @@ public class Estacionamiento{
     }
 
     public double SacarVehiculo(String patente, LocalTime salida){
+        CalcularPrecio(patente, salida);
+        Vehiculo vehiculo = d.Recuperar(patente);
+        precio = vehiculo.getPrecio();
+        d.Eliminar(patente);
+        conjuntopatentes.Sacar(patente);
+        contD --;
+        return (precio);
+    }
+
+    public double CalcularPrecio(String patente, LocalTime salida){
         Vehiculo vehiculo = d.Recuperar(patente);
         LocalTime entrada = vehiculo.getHoradeEntrada();
         Duration duracion = Duration.between(entrada, salida);
@@ -47,9 +84,6 @@ public class Estacionamiento{
         }else {
             precio = horas * 2000;
         }
-        d.Eliminar(patente);
-        conjuntopatentes.Sacar(patente);
-        contD --;
         return precio;
     }
 

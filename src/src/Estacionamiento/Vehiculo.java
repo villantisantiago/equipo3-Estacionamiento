@@ -10,6 +10,7 @@ public class Vehiculo {
     protected int valorHora;
     protected LocalTime horaDeEntrada;
     protected String tipo;
+    protected double precio = 0;
 
     // Metodo constructor
     public Vehiculo(String patente, String tipo, LocalTime horaDeEntrada){
@@ -34,6 +35,14 @@ public class Vehiculo {
 
     String getTipo(){
         return this.tipo;
+    }
+
+    double getPrecio () {
+        return precio;
+    }
+
+    public void setPrecio (double precio) {
+        this.precio = precio;
     }
 
     public void setHoraEntrada(LocalTime horadeEntrada){
