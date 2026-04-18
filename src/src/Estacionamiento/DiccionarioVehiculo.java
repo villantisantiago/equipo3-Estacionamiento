@@ -1,7 +1,5 @@
 package Estacionamiento;
 
-import Estacionamiento.TDAS.Conjuntos.ConjuntoA;
-import Estacionamiento.TDAS.Conjuntos.ConjuntosTDA;
 
 public class DiccionarioVehiculo implements estacionamientoDiccionario {
     private class NodoClave {

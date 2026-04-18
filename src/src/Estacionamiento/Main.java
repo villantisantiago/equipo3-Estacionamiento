@@ -1,24 +1,28 @@
 import Estacionamiento.Estacionamiento;
 import java.util.Scanner;
 import Estacionamiento.Vehiculo;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 void main() {
 
     Estacionamiento estacionamiento = new Estacionamiento();
     estacionamiento.EmpezarPrograma();
-    double recaudacion = 0;
+    double recaudacionDia = 0;
+    double recaudacionTotal = 0;
     String tipoVehiculo;
     boolean bandera = true;
     Scanner sc = new Scanner(System.in);
     while (bandera) {
         System.out.println(" ");
-        System.out.println("Estacionamiento viñescos de viñas");
+        System.out.println("Estacionamiento Viñescos de Viñas");
         System.out.println("=============================");
         System.out.println("1) Ingresar vehiculo");
         System.out.println("2) Retirar vehiculo");
         System.out.println("3) Lugares disponibles");
         System.out.println("4) Finalizar dia");
         System.out.println("5) Ver patentes actuales");
+        System.out.println("6) Recaudación total del sistema");
         System.out.println("0) Cerrar programa");
         System.out.println("=============================");
         System.out.print("Ingrese una opcion: ");
@@ -75,7 +79,7 @@ void main() {
                         System.out.print("Que vehiculo tiene? C/A: ");
                         String TipoVehiculo = sc.nextLine();
                         patente = patente.toUpperCase();
-                        Vehiculo vehiculo = new Vehiculo(patente, TipoVehiculo, LocalTime.of(00,00));
+                        Vehiculo vehiculo = new Vehiculo(patente, TipoVehiculo, LocalTime.of(0, 0));
                         estacionamiento.AgregarACola(vehiculo);
                     }
 
@@ -83,16 +87,30 @@ void main() {
                 break;
 
             case 2:
+                if (estacionamiento.CuantoLugar() == 1){
+                    //hablar de cuanto le vamos a poner de limite al estacionamiento para esto!!!!!!
+                    System.out.println("No hay vehiculos para retirar");
+                    break;
+                }
                 System.out.print("Digite la patente a retirar: ");
                 String pasarpatente = sc.nextLine();
                 pasarpatente = pasarpatente.toUpperCase();
+                while(!estacionamiento.EstaPatente(pasarpatente)){
+                    System.out.println("La patente ingresada no se encuentra en el estacionamiento. \n");
+                    System.out.print("Digite la patente a retirar: ");
+                    pasarpatente = sc.nextLine();
+                    pasarpatente = pasarpatente.toUpperCase();
+
+                }
                 System.out.print("Ingrese hora de salida (HH:mm): ");
                 String input = sc.nextLine();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
                 LocalTime hora = LocalTime.parse(input, formatter);
                 double total = estacionamiento.SacarVehiculo(pasarpatente, hora);
                 System.out.println("El importe a pagar es de $" + total);
-                recaudacion = recaudacion + total;
+                recaudacionDia = recaudacionDia + total;
+                recaudacionTotal = recaudacionTotal + total;
+
                 if (estacionamiento.CantidadCola() > 0) {
                     Vehiculo entra = estacionamiento.SacarCola();
                     System.out.println("Ingresará un vehiculo de la cola");
@@ -106,15 +124,19 @@ void main() {
                 break;
             case 3:
                 int cant = estacionamiento.CuantoLugar();
-                System.out.println("Hay " + cant + " lugares disponibles");
+                System.out.println("Hay " + cant + " lugar/es disponible/s");
                 break;
             case 4:
-                System.out.println("la recaudacion total del dia fue de $"+ recaudacion);
+                System.out.println("la recaudacion total del dia fue de $"+ recaudacionDia);
+                recaudacionTotal = recaudacionTotal +recaudacionDia;
+                recaudacionDia = 0;
                 estacionamiento.FinalizarDia();
                 break;
             case 5:
                 estacionamiento.Patentes();
                 break;
+            case 6:
+                System.out.println("El estacionamiento recaudó un total de $"+ recaudacionTotal);
         }
     }
 }

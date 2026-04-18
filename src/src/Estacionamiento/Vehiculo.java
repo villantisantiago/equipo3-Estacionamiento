@@ -1,13 +1,11 @@
 package Estacionamiento;
 
 import java.time.LocalTime;
-import java.util.Scanner;
 
 public class Vehiculo {
 
     // Atributos
     protected String patente;
-    protected int valorHora;
     protected LocalTime horaDeEntrada;
     protected String tipo;
     protected double precio = 0;
@@ -21,10 +19,6 @@ public class Vehiculo {
     }
 
     // Getter - Setter
-    public void setPatente(String patente){
-        this.patente = patente;
-    }
-
     String getPatente(){
         return this.patente;
     }
@@ -42,7 +36,7 @@ public class Vehiculo {
     }
 
     public void setPrecio (double precio) {
-        this.precio = precio;
+        this.precio += precio;
     }
 
     public void setHoraEntrada(LocalTime horadeEntrada){
