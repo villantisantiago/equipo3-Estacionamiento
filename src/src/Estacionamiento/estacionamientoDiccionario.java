@@ -1,6 +1,5 @@
 package Estacionamiento;
 
-import Estacionamiento.TDAS.Conjuntos.ConjuntosTDA;
 
 public interface estacionamientoDiccionario {
     void InicializarDiccionario();

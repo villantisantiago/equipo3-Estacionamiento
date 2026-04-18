@@ -2,7 +2,6 @@ package Estacionamiento;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-
 import Estacionamiento.TDAS.Colas.ColaTDA;
 import Estacionamiento.TDAS.Colas.ColaLD;
 
@@ -13,7 +12,7 @@ public class Estacionamiento{
     ConjuntoVehiculos conjuntopatentes = new ConjuntoVehiculos();
     double precio;
     int contD = 0;
-    int maximoD = 2;
+    int maximoD = 1;
     int contC = 0;
     String elemento;
 
@@ -26,11 +25,11 @@ public class Estacionamiento{
     public void FinalizarDia(){
         estacionamientoConjunto aux = new ConjuntoVehiculos();
         aux.InicializarConjunto();
-        String salida = "24:00";
+        String salida = "23:59";
         String entrada = "00:00";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime hora = LocalTime.parse(salida, formatter);
-        LocalTime hora2 = LocalTime.parse(salida, formatter);
+        LocalTime hora2 = LocalTime.parse(entrada, formatter);
 
         while(!conjuntopatentes.ConjuntoVacio()){
             elemento = conjuntopatentes.Elegir();
@@ -61,14 +60,14 @@ public class Estacionamiento{
         return conjuntopatentes.Pertenece(patente);
     }
 
-    public double SacarVehiculo(String patente, LocalTime salida){
-        CalcularPrecio(patente, salida);
+    public double SacarVehiculo(String patente, LocalTime salida){ // Pre: tiene que estar la patende en el diccionario
+        double precio2  = CalcularPrecio(patente, salida);
         Vehiculo vehiculo = d.Recuperar(patente);
         precio = vehiculo.getPrecio();
         d.Eliminar(patente);
         conjuntopatentes.Sacar(patente);
         contD --;
-        return (precio);
+        return (precio + precio2);
     }
 
     public double CalcularPrecio(String patente, LocalTime salida){
@@ -111,24 +110,24 @@ public class Estacionamiento{
         return vehiculo;
     }
 
-    public boolean ColaVacia(){  // pre: Cola inicializada y con almenos 1 Vehiculo dentro
-        return cola.ColaVacia();
-    }
-
     public void Patentes() {
         estacionamientoConjunto aux = new ConjuntoVehiculos();
         aux.InicializarConjunto();
-        while(!conjuntopatentes.ConjuntoVacio()){
-            elemento = conjuntopatentes.Elegir();
-            System.out.println(elemento);
-            aux.Agregar(elemento);
-            conjuntopatentes.Sacar(elemento);
-        }
+        if (!conjuntopatentes.ConjuntoVacio()) {
+            while(!conjuntopatentes.ConjuntoVacio()){
+                elemento = conjuntopatentes.Elegir();
+                System.out.println(elemento);
+                aux.Agregar(elemento);
+                conjuntopatentes.Sacar(elemento);
+            }
 
-        while(!aux.ConjuntoVacio()){
-            elemento = aux.Elegir();
-            conjuntopatentes.Agregar(elemento);
-            aux.Sacar(elemento);
+            while(!aux.ConjuntoVacio()){
+                elemento = aux.Elegir();
+                conjuntopatentes.Agregar(elemento);
+                aux.Sacar(elemento);
+        }
+            } else {
+            System.out.println("No se encuentran vehiculos en el estacionamiento.");
         }
     }
 }

@@ -10,21 +10,20 @@ public class ConjuntoVehiculos implements estacionamientoConjunto{
     }
 
     public void Agregar(String x) {
-        String patenteMayus = x.toUpperCase();
-        if (!this.Pertenece(patenteMayus)) {
-            a[cant] = patenteMayus;
+        if (!this.Pertenece(x)){
+            a[cant] = x;
             cant++;
         }
     }
 
     public void Sacar(String x) {
-        String patenteMayus = x.toUpperCase();
-        for (int i = 0; i < cant; i++) {
-            if (a[i].equals(patenteMayus)) {
-                a[i] = a[cant - 1];
-                cant--;
-                return;
-            }
+        int i = 0;
+        while (i < cant && a[i].equals(x)) {
+            i++;
+        if (i < cant) {
+            a[i] = a[cant -1];
+            cant--;
+        }
         }
     }
 
@@ -32,10 +31,9 @@ public class ConjuntoVehiculos implements estacionamientoConjunto{
         return a[cant - 1];
     }
 
-    public boolean Pertenece(String x) {
-        String patenteMayus = x.toUpperCase();
+    public boolean Pertenece(String v) {
         int i = 0;
-        while (i < cant && !a[i].equals(patenteMayus)) {
+        while (i < cant && !a[i].equals(v)) {
             i++;
         }
         return (i < cant);
