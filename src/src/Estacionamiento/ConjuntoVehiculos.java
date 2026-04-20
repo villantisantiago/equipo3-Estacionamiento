@@ -18,12 +18,12 @@ public class ConjuntoVehiculos implements estacionamientoConjunto{
 
     public void Sacar(String x) {
         int i = 0;
-        while (i < cant && a[i].equals(x)) {
+        while (i < cant && !a[i].equals(x)) {
             i++;
+        }
         if (i < cant) {
             a[i] = a[cant -1];
             cant--;
-        }
         }
     }
 
