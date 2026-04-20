@@ -88,7 +88,7 @@ void main() {
 
             case 2:
                 if (estacionamiento.CuantoLugar() == 1){
-                    //hablar de cuanto le vamos a poner de limite al estacionamiento para esto!!!!!!
+
                     System.out.println("No hay vehiculos para retirar");
                     break;
                 }

@@ -16,7 +16,7 @@ public class Estacionamiento{
     int contC = 0;
     String elemento;
 
-    public void EmpezarPrograma(){ // Habria q cambiarle el nombre a ese metodo
+    public void EmpezarPrograma(){
         d.InicializarDiccionario();
         cola.InicializarCola();
         conjuntopatentes.InicializarConjunto();
