@@ -81,8 +81,9 @@ void main() {
                         patente = patente.toUpperCase();
                         Vehiculo vehiculo = new Vehiculo(patente, TipoVehiculo, LocalTime.of(0, 0));
                         estacionamiento.AgregarACola(vehiculo);
+                    }else{
+                        System.out.println("No se agrego el vehiculo a la cola");
                     }
-
                 }
                 break;
 
